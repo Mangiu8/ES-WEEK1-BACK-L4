@@ -29,6 +29,7 @@ namespace ConsoleApp4
             {
                 Console.WriteLine("Login effettuato con successo");
                 utentiLoggati[_username] = new List<DateTime>();
+                utentiLoggati[_username].Add(DateTime.Now);
                 MenuPrincipale();
             }
             else
@@ -104,6 +105,7 @@ namespace ConsoleApp4
                 {
                     Console.WriteLine($"{_username} " + access.ToString());
                     Console.ReadLine();
+                    MenuPrincipale();
                 }
 
             }
@@ -113,11 +115,17 @@ namespace ConsoleApp4
         {
             Console.WriteLine("Inserisci il nome utente");
             string nomeUtente = Console.ReadLine();
-            if (utentiLoggati.ContainsKey(nomeUtente))
+            if (nomeUtente == "")
+            {
+                Console.WriteLine("Devi scivere qualcosa");
+                MenuPrincipale();
+            }
+            else if (utentiLoggati.ContainsKey(nomeUtente))
             {
                 DateTime oraLog = utentiLoggati[nomeUtente].LastOrDefault();
-                Console.WriteLine($"{nomeUtente} e' stato loggato l'ultima volta alle {oraLog}");
+                Console.WriteLine($"{nomeUtente} si e' loggato l'ultima volta alle {oraLog}");
                 MenuPrincipale();
+
             }
             else
             {
